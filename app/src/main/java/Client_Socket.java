@@ -51,6 +51,7 @@ public class Client_Socket extends AsyncTask {
                         tmp=tmp.substring(tmp.indexOf("{"), tmp.lastIndexOf("}") + 1);
                         json_read=new JSONObject(tmp);
                         //從java伺服器取得值後做拆解,可使用switch做不同動作的處理
+
                     }
                 }
             }catch(Exception e){
