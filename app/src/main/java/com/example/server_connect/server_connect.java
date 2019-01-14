@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class server_connect extends AppCompatActivity {
 
@@ -16,18 +17,17 @@ public class server_connect extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_server_connect);
 
-        usernameField = (EditText)findViewById(R.id.editText1);
-        passwordField = (EditText)findViewById(R.id.editText2);
+        usernameField = (EditText)findViewById(R.id.username);
+        passwordField = (EditText)findViewById(R.id.password);
 
-        status = (TextView)findViewById(R.id.textView6);
-        role = (TextView)findViewById(R.id.textView7);
-        method = (TextView)findViewById(R.id.textView9);
+
     }
 
     public void loginPost(View view){
         String username = usernameField.getText().toString();
         String password = passwordField.getText().toString();
-        method.setText("Post Method");
-        new SigninActivity(this,status,role,1).execute(username,password);
+        Toast toast = Toast.makeText(server_connect.this, "Yee", Toast.LENGTH_SHORT);
+        toast.show();
+        new SigninActivity(this).execute(username,password);
     }
 }

@@ -1,5 +1,6 @@
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.server_connect.R;
@@ -13,17 +14,18 @@ import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class Client_Socket extends AsyncTask {
+public class Client_Socket extends AppCompatActivity {
     private Thread thread;                //執行緒
     private Socket clientSocket;        //客戶端的socket
     private BufferedWriter bw;            //取得網路輸出串流
     private BufferedReader br;            //取得網路輸入串流
     private String tmp;                    //做為接收時的緩存
     private JSONObject json_write,json_read;        //從java伺服器傳遞與接收資料的json
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_server_connect);
         thread=new Thread(Connection);                //賦予執行緒工作
         thread.start();                    //讓執行緒開始執行
     }
