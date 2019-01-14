@@ -11,11 +11,10 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:text="@string/login"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="loginPost"
-        android:layout_marginTop="216dp" />
-
+        android:onClick="loginPost" />
+<!--
     <EditText
         android:id="@+id/password"
         android:layout_width="300dp"
@@ -39,5 +38,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
         android:layout_marginBottom="162dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="AAAAAAA"
+        android:layout_alignParentBottom="true"
+        android:id = "@+id/Show"/>
+    -->
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:id = "@+id/Edit"/>
 
 </RelativeLayout>
