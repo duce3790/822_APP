@@ -3,4 +3,7 @@
     <string name="login">Login</string>
     <string name="username">Enter your username </string>
     <string name="password">Enter your password</string>
+    <string name="light1">Switch Light 1</string>
+    <string name="light2">Switch Light 2</string>
+    <string name="fan">Switch Fan Speed</string>
 </resources>
