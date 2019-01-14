@@ -25,7 +25,7 @@ public class SigninActivity extends AsyncTask{
             String username = (String)arg0[0];
             String password = (String)arg0[1];
 
-            String link = "";
+            String link = "https://www.google.com.tw/";
             String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
             data += URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
