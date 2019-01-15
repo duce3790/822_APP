@@ -8,40 +8,47 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="300dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="@string/login"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="14dp"
         android:layout_marginBottom="10dp"
-        android:onClick="loginPost" />
+        android:onClick="loginPost"
+        android:text="@string/login" />
+
     <Button
         android:id="@+id/light1"
-        android:layout_width="300dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="@string/light1"
         android:layout_above="@id/login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:onClick="light1" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="87dp"
+        android:layout_marginBottom="-49dp"
+        android:onClick="light1"
+        android:text="@string/light1" />
+
     <Button
         android:id="@+id/light2"
-        android:layout_width="300dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="@string/light2"
         android:layout_above="@id/light1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:onClick="light2" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginBottom="-49dp"
+        android:onClick="light2"
+        android:text="@string/light2" />
+
     <Button
         android:id="@+id/fan"
-        android:layout_width="300dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="@string/fan"
         android:layout_above="@id/light2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:onClick="fan" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="-52dp"
+        android:onClick="fan"
+        android:text="@string/fan" />
 <!--
     <EditText
         android:id="@+id/password"
@@ -70,9 +77,9 @@
     <TextView
         android:id="@+id/Show"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:gravity="left"
+        android:layout_height="450dp"
+        android:gravity="center"
         android:layout_alignParentTop="true"
-        android:textSize="35sp" />
+        android:textSize="30sp" />
 
 </RelativeLayout>
