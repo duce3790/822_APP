@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     useLibrary 'org.apache.http.legacy'
     defaultConfig {
-        applicationId "com.example.server_connect"
+        applicationId "com.example.mainactivity"
         minSdkVersion 20
         targetSdkVersion 28
         versionCode 1

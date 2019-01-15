@@ -6,7 +6,6 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +16,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class server_connect extends AppCompatActivity {
+public class mainactivity extends AppCompatActivity {
 
     private TextView show;
     private String resultstr;
@@ -40,7 +38,7 @@ public class server_connect extends AppCompatActivity {
                 String response = (String) msg.obj;
                 String strs = response.substring(response.length()-3);
                 //show.setText(response);
-                Toast.makeText(server_connect.this,"yee", Toast.LENGTH_SHORT ).show();
+                Toast.makeText(mainactivity.this,"yee", Toast.LENGTH_SHORT ).show();
                 if(Character.getNumericValue(strs.charAt(0))==1)
                     light1 = true;
                 else
