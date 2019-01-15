@@ -13,7 +13,35 @@
         android:text="@string/login"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:onClick="loginPost" />
+    <Button
+        android:id="@+id/light1"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="@string/light1"
+        android:layout_above="@id/login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:onClick="light1" />
+    <Button
+        android:id="@+id/light2"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="@string/light2"
+        android:layout_above="@id/light1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:onClick="light2" />
+    <Button
+        android:id="@+id/fan"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:text="@string/fan"
+        android:layout_above="@id/light2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:onClick="fan" />
 <!--
     <EditText
         android:id="@+id/password"
@@ -38,18 +66,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
         android:layout_marginBottom="162dp" />
-
+-->
     <TextView
+        android:id="@+id/Show"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="AAAAAAA"
-        android:layout_alignParentBottom="true"
-        android:id = "@+id/Show"/>
-    -->
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:id = "@+id/Edit"/>
+        android:layout_height="250dp"
+        android:gravity="left"
+        android:layout_alignParentTop="true"
+        android:textSize="35sp" />
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,9 +21,12 @@ import java.util.regex.Pattern;
 
 public class server_connect extends AppCompatActivity {
 
-    //private EditText usernameField,passwordField;
     private TextView show;
-    private EditText edit;
+    private String resultstr;
+    private Button Light1, Light2, Fan;
+    public PostOperate postoperate;
+    boolean light1, light2;
+    int fan;
     public static final int SHOW_RESPONSE = 0;
     private Handler handler = new Handler() {
     @Override
@@ -32,7 +36,21 @@ public class server_connect extends AppCompatActivity {
             case SHOW_RESPONSE:
                 String response = (String) msg.obj;
                 //show.setText(response);
-                edit.setText(response);
+                show.setText(
+                        " Light 1 : " + response.charAt(0) +
+                        " Light 2 : " + response.charAt(1) +
+                        " Fan : " + response.charAt(2)
+                );
+                if(Character.getNumericValue(response.charAt(0))==1)
+                    light1 = true;
+                else
+                    light1 = false;
+                if(Character.getNumericValue(response.charAt(1))==1)
+                    light2 = true;
+                else
+                    light2 = false;
+                fan = Character.getNumericValue(response.charAt(2));
+
                 break;
             default:
                 break;
@@ -45,22 +63,27 @@ public class server_connect extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_server_connect);
-
-        //usernameField = (EditText)findViewById(R.id.username);
-        //passwordField = (EditText)findViewById(R.id.password);
-        //show = (TextView)findViewById(R.id.Show);
-        edit = (EditText)findViewById(R.id.Edit);
+        show = (TextView)findViewById(R.id.Show);
+        Light1 = (Button)findViewById(R.id.light1);
+        Light2 = (Button)findViewById(R.id.light2);
+        Fan = (Button)findViewById(R.id.fan);
+        postoperate = new PostOperate(server_connect.this);;
     }
 
     public void loginPost(View view){
-        //String username = usernameField.getText().toString();
-        //String password = passwordField.getText().toString();
-        Toast toast = Toast.makeText(server_connect.this, "Yee", Toast.LENGTH_SHORT);
-        toast.show();
         sendRequestWithHttpClient();
-
-        //new SigninActivity(this).execute(username,password);
     }
+    public void light1(View view){
+        postoperate.execute("light1");
+    }
+    public void light2(View view){
+        postoperate.execute("light2");
+    }
+    public void fan(View view){
+        postoperate.execute("fan");
+    }
+
+
 
     private void  sendRequestWithHttpClient(){
         new Thread(new Runnable() {
@@ -75,7 +98,7 @@ public class server_connect extends AppCompatActivity {
                     HttpResponse httpResponse = httpCient.execute(httpGet);
                     if (httpResponse.getStatusLine().getStatusCode() == 200){
                         Pattern state1 = Pattern.compile("<.+?>", Pattern.DOTALL);
-                        Pattern state2 = Pattern.compile("/s");
+                        Pattern state2 = Pattern.compile("[^0-9]");
                         HttpEntity entity = httpResponse.getEntity();
                         String response = EntityUtils.toString(entity,"utf-8");
                         Matcher match1 = state1.matcher(response);
