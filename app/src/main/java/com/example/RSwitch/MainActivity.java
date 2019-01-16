@@ -1,11 +1,15 @@
 package com.example.RSwitch;
 
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView show;
     private String resultstr;
-    private Button Light1, Light2, Fan;
+    private ImageButton id_setting,login;
 
     boolean light1, light2;
     int fan;
@@ -65,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Light1 = (Button)findViewById(R.id.light1);
-        Light2 = (Button)findViewById(R.id.light2);
 
         ipconfig.verifyStoragepermit(this);
         switch (ipconfig.Createipconfig()){
@@ -80,6 +82,27 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "ipconfig創建失敗", Toast.LENGTH_SHORT).show();
                 break;
         }
+        View.OnClickListener listener_id_setting = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goin = new Intent();//建立intent
+                goin.setClass(MainActivity.this, com.example.RSwitch.id_setting.class);
+                startActivity(goin);//啟動
+            }
+        };
+        id_setting = (ImageButton) findViewById(R.id.id_setting);
+        id_setting.setOnClickListener(listener_id_setting);
+
+        View.OnClickListener listener_login = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goin = new Intent();//建立intent
+                goin.setClass(MainActivity.this, com.example.RSwitch.LoginActivity.class);
+                startActivity(goin);//啟動
+            }
+        };
+        login = (ImageButton) findViewById(R.id.login);
+        login.setOnClickListener(listener_login);
     }
 
     public void loginPost(View view){
