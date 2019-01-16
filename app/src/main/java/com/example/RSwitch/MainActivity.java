@@ -247,18 +247,19 @@ public class MainActivity extends AppCompatActivity {
                 params.add(new BasicNameValuePair("username", username));
                 params.add(new BasicNameValuePair("password", password));
 
-                httpPost.setEntity(new UrlEncodedFormEntity(params,HTTP.UTF_8));
+                httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
                 Log.i(TAG, params.toString());
                 HttpResponse httpResponse = new DefaultHttpClient().execute(httpPost);
-                String strResult = EntityUtils.toString(httpResponse.getEntity(),HTTP.UTF_8);
+                String strResult = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
                 Log.i(TAG, strResult.toString());
 
                 return null;
-            }catch (Exception e){
+            } catch (Exception e) {
                 return null;
             }
 
         }
+    }
 
     private Toolbar.OnMenuItemClickListener onMenuItemClick = new Toolbar.OnMenuItemClickListener() {
         @Override
@@ -275,14 +276,14 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         }
+
+        public boolean onCreateOptionsMenu(Menu menu) {
+            // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
+            getMenuInflater().inflate(R.menu.main, menu);
+            return true;
+        }
     };
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
 
-    }
 }
