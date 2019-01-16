@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -16,7 +17,14 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +34,6 @@ public class server_connect extends AppCompatActivity {
     private TextView show;
     private String resultstr;
     private Button Light1, Light2, Fan;
-
 
     boolean light1, light2;
     int fan;
@@ -40,7 +47,7 @@ public class server_connect extends AppCompatActivity {
                 String response = (String) msg.obj;
                 String strs = response.substring(response.length()-3);
                 //show.setText(response);
-                Toast.makeText(server_connect.this,"yee", Toast.LENGTH_SHORT ).show();
+                //Toast.makeText(server_connect.this,"yee", Toast.LENGTH_SHORT ).show();
                 if(Character.getNumericValue(strs.charAt(0))==1)
                     light1 = true;
                 else
@@ -72,6 +79,19 @@ public class server_connect extends AppCompatActivity {
         Light1 = (Button)findViewById(R.id.light1);
         Light2 = (Button)findViewById(R.id.light2);
         Fan = (Button)findViewById(R.id.fan);
+
+        ipconfig.verifyStoragepermit(this);
+        switch (ipconfig.Createipconfig()){
+            case 1:
+                Toast.makeText(this, "ipconfig已存在", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(this, "ipconfig已創建成功", Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                Toast.makeText(this, "ipconfig創建失敗", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     public void loginPost(View view){

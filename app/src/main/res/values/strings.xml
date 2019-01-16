@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">server_connect</string>
+    <string name="app_name">RSwitch</string>
     <string name="login">Login</string>
     <string name="username">Enter your username </string>
     <string name="password">Enter your password</string>
