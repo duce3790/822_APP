@@ -1,4 +1,4 @@
-package com.example.server_connect;
+package com.example.MainActivity;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.mainactivity", appContext.getPackageName());
+        assertEquals("com.example.server_connect", appContext.getPackageName());
     }
 }

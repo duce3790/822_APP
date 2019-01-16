@@ -1,4 +1,4 @@
-package com.example.server_connect;
+package com.example.MainActivity;
 
 import org.junit.Test;
 

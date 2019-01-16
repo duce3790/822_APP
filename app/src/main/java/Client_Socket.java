@@ -1,9 +1,8 @@
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-import com.example.server_connect.R;
+import com.example.MainActivity.R;
 
 import org.json.JSONObject;
 
@@ -25,7 +24,7 @@ public class Client_Socket extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_server_connect);
+        setContentView(R.layout.activity_main);
         thread=new Thread(Connection);                //賦予執行緒工作
         thread.start();                    //讓執行緒開始執行
     }

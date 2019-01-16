@@ -1,4 +1,4 @@
-package com.example.server_connect;
+package com.example.MainActivity;
 
 
 import android.content.Context;
