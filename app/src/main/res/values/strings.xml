@@ -29,6 +29,9 @@
     </string>
 
     <!-- Strings related to login -->
-
     <string name="ipsettingtitle">IP list</string>
+
+    <!-- Strings related to IP setting -->
+    <string name="fail_load">IP config load failed</string>
+    <string name="success_load">IP config load successful</string>
 </resources>

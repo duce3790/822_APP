@@ -1,7 +1,6 @@
 package com.example.RSwitch;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,7 +8,6 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,12 +24,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -85,17 +77,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ipconfig.verifyStoragepermit(this);
-        switch (ipconfig.Createipconfig()){
-            case 1:
-                Toast.makeText(this, "ipconfig已存在", Toast.LENGTH_SHORT).show();
-                break;
-            case 2:
-                Toast.makeText(this, "ipconfig已創建成功", Toast.LENGTH_SHORT).show();
-                break;
-            case 3:
-                Toast.makeText(this, "ipconfig創建失敗", Toast.LENGTH_SHORT).show();
-                break;
-        }
+        ipconfig.Createipconfig();
+
 
         Light1 = (ImageButton)findViewById(R.id.light1);
         Light2 = (ImageButton)findViewById(R.id.light2);
@@ -106,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "ClickLight1", Toast.LENGTH_SHORT).show();
-                new PostCmd().execute("http://140.114.222.158/", "light1");
+                new PostCmd().execute("http://140.114.222.158/", "apple", "banana", "orange");
             }
         };
         Light1.setOnClickListener(listener_light1);
@@ -115,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "ClickLight2", Toast.LENGTH_SHORT).show();
-                new PostCmd().execute("http://140.114.222.158/", "light2");
+                new PostCmd().execute("http://140.114.222.158/", "1", "2", "3");
             }
         };
         Light2.setOnClickListener(listener_light2);
@@ -228,15 +211,19 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 Log.i(TAG, "async");
-                String unit = strings[1].toUpperCase();
                 String link = strings[0];
+                String unit = strings[1];
+                String username = strings[2];
+                String password = strings[3];
 
 
                 HttpClient httpCient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(link);
 
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("light1", unit));
+                params.add(new BasicNameValuePair("switch", unit));
+                params.add(new BasicNameValuePair("username", username));
+                params.add(new BasicNameValuePair("password", password));
 
                 httpPost.setEntity(new UrlEncodedFormEntity(params,HTTP.UTF_8));
                 Log.i(TAG, params.toString());
