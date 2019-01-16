@@ -1,4 +1,4 @@
-package com.example.MainActivity;
+package com.example.RSwitch;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent goin = new Intent();//建立intent
-                goin.setClass(MainActivity.this, com.example.MainActivity.id_setting.class);
+                goin.setClass(MainActivity.this, com.example.RSwitch.id_setting.class);
                 startActivity(goin);//啟動
             }
         };

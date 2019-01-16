@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.MainActivity.id_setting">
+    tools:context="com.example.RSwitch.id_setting">
 
 </android.support.constraint.ConstraintLayout>

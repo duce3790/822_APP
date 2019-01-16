@@ -1,4 +1,4 @@
-package com.example.MainActivity;
+package com.example.RSwitch;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

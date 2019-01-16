@@ -1,4 +1,4 @@
-package com.example.MainActivity;
+package com.example.RSwitch;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

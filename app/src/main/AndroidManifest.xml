@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.MainActivity">
+    package="com.example.RSwitch">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.RSwitch.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" >
         <intent-filter>
@@ -29,7 +29,7 @@
 
 
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.RSwitch.LoginActivity"
             android:label="@string/logintitle">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
         </activity>
 
         <activity
-            android:name=".id_setting"
+            android:name="com.example.RSwitch.id_setting"
             android:label="@string/ipsettingtitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
