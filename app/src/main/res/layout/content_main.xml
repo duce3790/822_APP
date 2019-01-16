@@ -17,7 +17,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:background="@layout/light1_press"
-        android:onClick="light1"
+
         android:text="@string/light1" />
 
     <ImageButton
@@ -29,7 +29,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="194dp"
         android:layout_toRightOf="@id/light1"
-        android:onClick="light2"
+
         android:background="@layout/light2_press"
         android:text="@string/light2" />
 
@@ -41,7 +41,7 @@
         android:layout_centerInParent="true"
         android:layout_alignLeft="@+id/light1"
         android:layout_below="@+id/light1"
-        android:onClick="fan"
+
         android:background="@layout/fan_switch_press"
         android:text="@string/fan" />
 
@@ -54,12 +54,12 @@
         android:layout_alignLeft="@+id/light2"
         android:layout_below="@+id/light2"
         android:layout_toRightOf="@id/fan_switch"
-        android:onClick="fan"
+
         android:background="@layout/fan_speed_press"
         android:text="@string/fan" />
 
     <ImageButton
-        android:id="@+id/id_setting"
+        android:id="@+id/ip_setting"
         android:layout_width="190dp"
         android:layout_height="150dp"
         android:layout_alignParentLeft="true"
@@ -69,7 +69,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginBottom="0dp"
         android:background="@layout/id_setting_press"
-        android:onClick="fan"
+
         android:text="@string/fan" />
 
     <ImageButton
@@ -81,7 +81,7 @@
         android:layout_alignLeft="@+id/light2"
         android:layout_toRightOf="@+id/id_setting"
         android:layout_below="@+id/fan_speed"
-        android:onClick="loginPost"
+
         android:background="@layout/login_press"
         android:text="@string/login" />
 

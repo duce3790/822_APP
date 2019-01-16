@@ -27,7 +27,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
+
         </intent-filter>
         </activity>
 
@@ -37,12 +37,13 @@
             android:label="@string/logintitle">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
 
         </activity>
 
         <activity
-            android:name="com.example.RSwitch.id_setting"
+            android:name="com.example.RSwitch.ip_setting"
             android:label="@string/ipsettingtitle">
 
             <intent-filter>

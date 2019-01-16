@@ -55,7 +55,7 @@ public class Post extends AsyncTask{
     }
 
     protected void onPostExecute(String result){
-
+        return;
     }
 
 }
