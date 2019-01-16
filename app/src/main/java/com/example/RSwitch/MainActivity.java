@@ -1,21 +1,11 @@
 package com.example.RSwitch;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageButton;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,148 +19,69 @@ import org.apache.http.util.EntityUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     private TextView show;
     private String resultstr;
-    private ImageButton Light1, Light2, Fan,id_setting;
-
+    private Button Light1, Light2, Fan;
 
     boolean light1, light2;
     int fan;
     public static final int SHOW_RESPONSE = 0;
     private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case SHOW_RESPONSE:
-                    String response = (String) msg.obj;
-                    String strs = response.substring(response.length()-3);
-                    //show.setText(response);
-                    Toast.makeText(MainActivity.this,"yee", Toast.LENGTH_SHORT ).show();
-                    if(Character.getNumericValue(strs.charAt(0))==1)
-                        light1 = true;
-                    else
-                        light1 = false;
-                    if(Character.getNumericValue(strs.charAt(1))==1)
-                        light2 = true;
-                    else
-                        light2 = false;
-                    fan = Character.getNumericValue(strs.charAt(2));
-                    show.setText(
-                            "Light 1 : " + strs.charAt(0) + "\n" +
-                                    "Light 2 : " + strs.charAt(1) + "\n" +
-                                    "Fan Speed : " + strs.charAt(2)
-                    );
+    @Override
+    public void handleMessage(Message msg) {
+        super.handleMessage(msg);
+        switch (msg.what) {
+            case SHOW_RESPONSE:
+                String response = (String) msg.obj;
+                String strs = response.substring(response.length()-3);
+                //show.setText(response);
+                //Toast.makeText(MainActivity.this,"yee", Toast.LENGTH_SHORT ).show();
+                if(Character.getNumericValue(strs.charAt(0))==1)
+                    light1 = true;
+                else
+                    light1 = false;
+                if(Character.getNumericValue(strs.charAt(1))==1)
+                    light2 = true;
+                else
+                    light2 = false;
+                fan = Character.getNumericValue(strs.charAt(2));
+                show.setText(
+                                "Light 1 : " + strs.charAt(0) + "\n" +
+                                "Light 2 : " + strs.charAt(1) + "\n" +
+                                "Fan Speed : " + strs.charAt(2)
+                );
 
-                    break;
-                default:
-                    break;
-            }
+                break;
+            default:
+                break;
         }
-    };
+    }
+};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Light1 = (Button)findViewById(R.id.light1);
+        Light2 = (Button)findViewById(R.id.light2);
 
-        Light1 = (ImageButton)findViewById(R.id.light1);
-        Light2 = (ImageButton)findViewById(R.id.light2);
-        Fan = (ImageButton)findViewById(R.id.fan_speed);
-        id_setting = (ImageButton) findViewById(R.id.id_setting);
-
-        View.OnClickListener listener_id_setting = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goin = new Intent();//建立intent
-                goin.setClass(MainActivity.this, com.example.RSwitch.id_setting.class);
-                startActivity(goin);//啟動
-            }
-        };
-        id_setting = (ImageButton) findViewById(R.id.id_setting);
-        id_setting.setOnClickListener(listener_id_setting);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        ipconfig.verifyStoragepermit(this);
+        switch (ipconfig.Createipconfig()){
+            case 1:
+                Toast.makeText(this, "ipconfig已存在", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(this, "ipconfig已創建成功", Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                Toast.makeText(this, "ipconfig創建失敗", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
     public void loginPost(View view){
         sendRequestWithHttpClient("login");
     }
@@ -248,4 +159,5 @@ public class MainActivity extends AppCompatActivity
         }).start();
 
     }
+
 }
