@@ -29,7 +29,7 @@ import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class server_connect extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private TextView show;
     private String resultstr;
@@ -47,7 +47,7 @@ public class server_connect extends AppCompatActivity {
                 String response = (String) msg.obj;
                 String strs = response.substring(response.length()-3);
                 //show.setText(response);
-                //Toast.makeText(server_connect.this,"yee", Toast.LENGTH_SHORT ).show();
+                //Toast.makeText(MainActivity.this,"yee", Toast.LENGTH_SHORT ).show();
                 if(Character.getNumericValue(strs.charAt(0))==1)
                     light1 = true;
                 else

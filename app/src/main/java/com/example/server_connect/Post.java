@@ -12,9 +12,9 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 
-public class SigninActivity extends AsyncTask{
+public class Post extends AsyncTask{
 
-    public SigninActivity(Context context){}
+    public Post(Context context){}
 
     protected void onPreExecute(){
     }
