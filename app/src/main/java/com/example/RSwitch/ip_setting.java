@@ -3,7 +3,7 @@ package com.example.RSwitch;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class id_setting extends AppCompatActivity {
+public class ip_setting extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
