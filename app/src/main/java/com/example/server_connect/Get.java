@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class PostOperate extends AsyncTask<String, Void, String>{
+public class Get extends AsyncTask<String, Void, String>{
 
 
     protected void onPreExecute(){
