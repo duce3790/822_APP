@@ -1,4 +1,4 @@
-package com.example.server_connect;
+package com.example.RSwitch;
 
 import java.io.BufferedReader;
 import java.io.IOException;

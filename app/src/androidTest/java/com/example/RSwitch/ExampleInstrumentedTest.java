@@ -1,4 +1,4 @@
-package com.example.server_connect;
+package com.example.RSwitch;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

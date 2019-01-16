@@ -1,4 +1,4 @@
-package com.example.server_connect;
+package com.example.RSwitch;
 
 import android.Manifest;
 import android.app.Activity;

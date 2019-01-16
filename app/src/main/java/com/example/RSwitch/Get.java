@@ -1,8 +1,7 @@
-package com.example.server_connect;
+package com.example.RSwitch;
 
 
 import android.os.AsyncTask;
-import android.widget.TextView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -11,7 +10,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
-import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
