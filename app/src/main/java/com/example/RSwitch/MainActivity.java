@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                 params.add(new BasicNameValuePair("password", password));
 
                 httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-                Log.i(TAG, params.toString());
+                Log.i(TAG, link + params.toString());
                 HttpResponse httpResponse = new DefaultHttpClient().execute(httpPost);
                 String strResult = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
                 Log.i(TAG, strResult.toString());
