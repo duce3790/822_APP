@@ -127,9 +127,9 @@ public class MainActivity extends AppCompatActivity {
         // App Logo
         //toolbar.setLogo(R.drawable.ic_launcher);
         // Title
-        toolbar.setTitle("My Title");
+        toolbar.setTitle("RSwitch");
         // Sub Title
-        toolbar.setSubtitle("Sub title");
+        toolbar.setSubtitle("created by Green Chips");
 
         setSupportActionBar(toolbar);
 
