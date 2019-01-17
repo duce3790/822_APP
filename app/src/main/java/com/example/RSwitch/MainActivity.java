@@ -83,11 +83,14 @@ public class MainActivity extends AppCompatActivity {
         Light2 = (ImageButton)findViewById(R.id.light2);
         IP_setting = (ImageButton) findViewById(R.id.ip_setting);
         login = (ImageButton) findViewById(R.id.login);
+        final String user = LoginActivity.username;
+        final String pass = LoginActivity.password;
 
         View.OnClickListener listener_light1 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new PostCmd().execute("http://" + ip_setting.IP + "/", "apple", "banana", "orange");
+                new PostCmd().execute("http://" + ip_setting.IP, "light1", user, pass);
+                sendRequestWithHttpClient("light1");
             }
         };
         Light1.setOnClickListener(listener_light1);
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener_light2 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new PostCmd().execute("http://140.114.222.158/", "1", "2", "3");
+                new PostCmd().execute("http://" + ip_setting.IP , "light2", user, pass);
             }
         };
         Light2.setOnClickListener(listener_light2);
@@ -114,9 +117,13 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener_login = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent goin = new Intent();//建立intent
-                goin.setClass(MainActivity.this, com.example.RSwitch.LoginActivity.class);
-                startActivity(goin);//啟動
+                if(!LoginActivity.logined){
+                    Intent goin = new Intent();//建立intent
+                    goin.setClass(MainActivity.this, com.example.RSwitch.LoginActivity.class);
+                    startActivity(goin);//啟動
+                }else{
+                    Toast.makeText(MainActivity.this, "You are Logined", Toast.LENGTH_SHORT).show();
+                }
             }
         };
 
@@ -179,33 +186,6 @@ public class MainActivity extends AppCompatActivity {
 
                     HttpResponse httpResponse = httpCient.execute(httpGet);
 
-                    if (httpResponse.getStatusLine().getStatusCode() == 200){
-
-                        Pattern state1 = Pattern.compile("<.+?>", Pattern.DOTALL);
-
-                        Pattern state2 = Pattern.compile("[^0-9]");
-
-                        HttpEntity entity = httpResponse.getEntity();
-
-                        String response = EntityUtils.toString(entity,"utf-8");
-
-                        Matcher match1 = state1.matcher(response);
-
-                        String string1 = match1.replaceAll("");
-
-                        Matcher match2 = state2.matcher(string1);
-
-                        String string2 = match2.replaceAll("");
-
-                        Message message = new Message();
-
-                        message.what = SHOW_RESPONSE;
-
-                        message.obj = string2;
-
-                        handler.sendMessage(message);
-                    }
-
                 }catch (Exception e){
 
                     e.printStackTrace();
@@ -227,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 Log.i(TAG, "async");
                 String link = strings[0];
-                String unit = strings[1];
+                String light1 = strings[1];
                 String username = strings[2];
                 String password = strings[3];
 
@@ -236,15 +216,18 @@ public class MainActivity extends AppCompatActivity {
                 HttpPost httpPost = new HttpPost(link);
 
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("switch", unit));
-                params.add(new BasicNameValuePair("username", username));
+                params.add(new BasicNameValuePair("account", username));
                 params.add(new BasicNameValuePair("password", password));
+                params.add(new BasicNameValuePair("light1", "LIGHT 1"));
+                params.add(new BasicNameValuePair("light2", "LIGHT 2"));
+                //params.add(new BasicNameValuePair("username", username));
+                //params.add(new BasicNameValuePair("password", password));
 
                 httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
                 Log.i(TAG, link + params.toString());
                 HttpResponse httpResponse = new DefaultHttpClient().execute(httpPost);
                 String strResult = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);
-                Log.i(TAG, strResult.toString());
+                Log.i(TAG, strResult);
 
                 return null;
             } catch (Exception e) {
@@ -260,7 +243,12 @@ public class MainActivity extends AppCompatActivity {
             String msg = "";
             switch (menuItem.getItemId()) {
                 case R.id.action_logout:
-                    msg += "Click setting";
+                    msg += "Log out";
+                    LoginActivity.logined = false;
+                    Intent goin = new Intent();//建立intent
+                    goin.setClass(MainActivity.this, com.example.RSwitch.LoginActivity.class);
+                    startActivity(goin);//啟動
+                    finish();
                     break;
             }
 
