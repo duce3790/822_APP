@@ -277,13 +277,13 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        public boolean onCreateOptionsMenu(Menu menu) {
-            // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
-            getMenuInflater().inflate(R.menu.main, menu);
-            return true;
-        }
+
     };
 
-
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
 }
