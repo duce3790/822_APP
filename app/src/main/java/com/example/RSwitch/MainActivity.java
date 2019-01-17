@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -80,10 +79,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ipconfig.verifyStoragepermit(this);
-        ipconfig.Createipconfig();
-
-
         Light1 = (ImageButton)findViewById(R.id.light1);
         Light2 = (ImageButton)findViewById(R.id.light2);
         IP_setting = (ImageButton) findViewById(R.id.ip_setting);
@@ -92,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener_light1 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "ClickLight1", Toast.LENGTH_SHORT).show();
-                new PostCmd().execute("http://140.114.222.158/", "apple", "banana", "orange");
+                new PostCmd().execute("http://" + ip_setting.IP + "/", "apple", "banana", "orange");
             }
         };
         Light1.setOnClickListener(listener_light1);
@@ -101,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener_light2 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "ClickLight2", Toast.LENGTH_SHORT).show();
                 new PostCmd().execute("http://140.114.222.158/", "1", "2", "3");
             }
         };
