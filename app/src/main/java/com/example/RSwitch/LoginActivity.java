@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -42,6 +43,8 @@ import org.apache.http.util.EntityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -55,6 +58,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final int REQUEST_READ_CONTACTS = 0;
     public static boolean logined;
+    public static String username;
+    public static String password;
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -164,8 +169,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        username = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -178,11 +183,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
 
         // Check for a valid email address.
-        if (TextUtils.isEmpty(email)) {
+        if (TextUtils.isEmpty(username)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
             cancel = true;
-        } else if (!isEmailValid(email)) {
+        } else if (!isEmailValid(username)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
@@ -197,13 +202,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             showProgress(true);
             Toast.makeText(LoginActivity.this, "login...", Toast.LENGTH_SHORT).show();
-            new UserLoginTask().execute(ip_setting.IP, email, password);
+            new UserLoginTask().execute("http://" + ip_setting.IP , username, password);
         }
     }
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return true;
     }
 
     private boolean isPasswordValid(String password) {
@@ -325,17 +330,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 HttpPost httpPost = new HttpPost(link);
 
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
-                params.add(new BasicNameValuePair("username", username));
+                params.add(new BasicNameValuePair("account", username));
                 params.add(new BasicNameValuePair("password", password));
                 httpPost.setEntity(new UrlEncodedFormEntity(params,HTTP.UTF_8));
                 Log.i(TAG, params.toString());
                 HttpResponse httpResponse = new DefaultHttpClient().execute(httpPost);
-                String strResult = EntityUtils.toString(httpResponse.getEntity(),HTTP.UTF_8);
-                Log.i(TAG, strResult.toString());
+                HttpEntity httpEntity = httpResponse.getEntity();
+                String strResult = EntityUtils.toString(httpEntity);
+                Log.i(TAG, strResult);
+                if(strResult.contains("success")){
+                    Log.i(TAG, "True");
+                    return true;
+                }else{
+                    Log.i(TAG, "False");
+                    return false;
+                }
 
-                return true;
             } catch (Exception e) {
-                return true;
+                return false;
             }
 
             // Account exists, return true if the password matches.
