@@ -34,4 +34,12 @@
     <!-- Strings related to IP setting -->
     <string name="fail_load">IP config load failed</string>
     <string name="success_load">IP config load successful</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+        <!--about dialog-->
+        <string name="OK">OK</string>
+        <string name="Cancel">Cancel</string>
+        <string name="inValid">Please enter a VALID address</string>
+        <string name="title">Add a address to connect</string>
 </resources>
