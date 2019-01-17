@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,7 +54,11 @@ public class ip_setting extends AppCompatActivity {
                 Toast.makeText(ip_setting.this, "set " + IP + " as connent target", Toast.LENGTH_SHORT).show();
                 if(IP!=null){
                     Intent goin = new Intent();//建立intent
-                    goin.setClass(ip_setting.this, LoginActivity.class);
+                    if(LoginActivity.logined){
+                        goin.setClass(ip_setting.this, MainActivity.class);
+                    }else{
+                        goin.setClass(ip_setting.this, LoginActivity.class);
+                    }
                     startActivity(goin);//啟動
                     finish();
                 }
@@ -61,7 +66,6 @@ public class ip_setting extends AppCompatActivity {
 
         });
 
-        this.registerForContextMenu(IPlist);
 
         Add = (Button)findViewById(R.id.add);
         Edit = (Button)findViewById(R.id.edit);
@@ -73,7 +77,7 @@ public class ip_setting extends AppCompatActivity {
                 final EditText editText = new EditText(ip_setting.this);
                 new AlertDialog.Builder(ip_setting.this)
                         .setTitle(getString(R.string.title))
-                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .setIcon(android.R.drawable.ic_input_add)
                         .setView(editText).setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -91,21 +95,9 @@ public class ip_setting extends AppCompatActivity {
 
         Add.setOnClickListener(listener_add);
 
-
-
-
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        if (v == IPlist) {
-            menu.setHeaderIcon(R.mipmap.ic_launcher);
-            menu.add(0, 0, 0, "edit");
-            menu.add(0, 1, 0, "delete");
-            menu.add(0, 2, 0, "cancel");
-        }
-    }
+
 
     private class DoIOoperater extends AsyncTask<String, Void, ArrayList>{
 

@@ -28,6 +28,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-
+    public static boolean logined;
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -195,8 +196,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute(email, password);
+            Toast.makeText(LoginActivity.this, "login...", Toast.LENGTH_SHORT).show();
+            new UserLoginTask().execute(ip_setting.IP, email, password);
         }
     }
 
@@ -306,26 +307,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
 
-        private final String mEmail;
-        private final String mPassword;
-
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
+        UserLoginTask() {
+         ;
         }
 
         @Override
         protected Boolean doInBackground(String... strings) {
             // TODO: attempt authentication against a network service.
-            String TAG = "POSTCMD loging";
+            String TAG = "POSTlog";
             try {
                 // Simulate network access.
+                String link = (String)strings[0];
                 String username = (String)strings[1];
                 String password = (String)strings[2];
-
-
-                String link = "http://140.114.222.158/index.php";
-
 
                 HttpClient httpCient = new DefaultHttpClient();
                 HttpPost httpPost = new HttpPost(link);
@@ -338,6 +332,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 HttpResponse httpResponse = new DefaultHttpClient().execute(httpPost);
                 String strResult = EntityUtils.toString(httpResponse.getEntity(),HTTP.UTF_8);
                 Log.i(TAG, strResult.toString());
+
                 return true;
             } catch (Exception e) {
                 return true;
@@ -352,7 +347,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
             showProgress(false);
-
+            logined = success;
             if (success) {
                 Intent goin = new Intent();//建立intent
                 goin.setClass(LoginActivity.this, com.example.RSwitch.MainActivity.class);
