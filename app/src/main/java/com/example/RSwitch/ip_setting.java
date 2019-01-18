@@ -57,13 +57,13 @@ public class ip_setting extends AppCompatActivity {
                 IP = contents.get(position);
                 Toast.makeText(ip_setting.this, "set " + IP + " as connent target", Toast.LENGTH_SHORT).show();
                 if(IP!=null){
-                    Intent goin = new Intent();//建立intent
+                    Intent goin = new Intent();
                     if(LoginActivity.logined){
                         goin.setClass(ip_setting.this, MainActivity.class);
                     }else{
                         goin.setClass(ip_setting.this, LoginActivity.class);
                     }
-                    startActivity(goin);//啟動
+                    startActivity(goin);
                     finish();
                 }
             }

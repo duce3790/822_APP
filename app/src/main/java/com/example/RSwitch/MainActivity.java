@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Light1 = (ImageButton)findViewById(R.id.light1);
-        Light2 = (ImageButton)findViewById(R.id.light2);
+        Light1 = (ImageButton) findViewById(R.id.light1);
+        Light2 = (ImageButton) findViewById(R.id.light2);
         IP_setting = (ImageButton) findViewById(R.id.ip_setting);
         login = (ImageButton) findViewById(R.id.login);
         ip = (TextView) findViewById(R.id.ip);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener_light2 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new PostCmd().execute("http://" + IP , "light2", user, pass);
+                new PostCmd().execute("http://" + IP, "light2", user, pass);
             }
         };
         Light2.setOnClickListener(listener_light2);
@@ -94,11 +94,11 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener_login = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!LoginActivity.logined){
-                    Intent goin = new Intent();//建立intent
+                if (!LoginActivity.logined) {
+                    Intent goin = new Intent();
                     goin.setClass(MainActivity.this, com.example.RSwitch.LoginActivity.class);
-                    startActivity(goin);//啟動
-                }else{
+                    startActivity(goin);
+                } else {
                     Toast.makeText(MainActivity.this, "You are Logined", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -107,29 +107,19 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(listener_login);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        // App Logo
-        //toolbar.setLogo(R.drawable.ic_launcher);
-        // Title
         toolbar.setTitle("RSwitch");
 
         setSupportActionBar(toolbar);
 
-        // Navigation Icon 要設定在 setSupoortActionBar 才有作用
-        // 否則會出現 back bottom
         toolbar.setNavigationIcon(R.drawable.hamburger_icon);
-        // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
 
-
-
-        ip.setText("  Login as : "+ip_setting.IP);
-        status.setText("  Host IP : "+LoginActivity.username);
-
-    }
+        ip.setText("  Login as : " +LoginActivity.username );
+        status.setText("  Host IP : " + ip_setting.IP);
 
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -141,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.setClass(MainActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
-                }else if(id == R.id.nav_send){
+                } else if (id == R.id.nav_send) {
 
                 }
 
@@ -152,47 +142,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-/*
-
-    private void  sendRequestWithHttpClient(final String str){
-
-        new Thread(new Runnable() {
-
-            @Override
-
-            public void run() {
-
-                HttpClient httpCient = new DefaultHttpClient();
-                HttpGet httpGet;
-                if(str.equals("light1")){
-                    httpGet = new HttpGet("http://140.114.222.158/index.php?light1=LIGHT+1");
-                }else if(str.equals("light2")){
-                    httpGet = new HttpGet("http://140.114.222.158/index.php?light2=LIGHT+2");
-                }else if(str.equals("fan")){
-                    httpGet = new HttpGet("http://140.114.222.158/index.php?fan=FAN");
-                }else{
-                    httpGet = new HttpGet("http://140.114.222.158/");
-                }
-
-                try{
-
-                    HttpResponse httpResponse = httpCient.execute(httpGet);
-
-                }catch (Exception e){
-
-                    e.printStackTrace();
-
-                }
-
-            }
-
-        }).start();
-    }
-*/
-
     public class PostCmd extends AsyncTask<String, Void, Void> {
 
         @Override
@@ -202,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 Log.i(TAG, "async");
                 String link = strings[0];
-                String light1 = strings[1];
+                String light = strings[1];
                 String username = strings[2];
                 String password = strings[3];
 
@@ -213,8 +162,12 @@ public class MainActivity extends AppCompatActivity {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("account", username));
                 params.add(new BasicNameValuePair("password", password));
-                params.add(new BasicNameValuePair("light1", "LIGHT 1"));
-                params.add(new BasicNameValuePair("light2", "LIGHT 2"));
+                if(light.equals("light1")){
+                    params.add(new BasicNameValuePair("light1", "LIGHT 1"));
+                }else{
+                    params.add(new BasicNameValuePair("light2", "LIGHT 2"));
+                }
+
                 //params.add(new BasicNameValuePair("username", username));
                 //params.add(new BasicNameValuePair("password", password));
 
@@ -240,9 +193,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_logout:
                     msg += "Log out";
                     LoginActivity.logined = false;
-                    Intent goin = new Intent();//建立intent
+                    Intent goin = new Intent();
                     goin.setClass(MainActivity.this, com.example.RSwitch.LoginActivity.class);
-                    startActivity(goin);//啟動
+                    startActivity(goin);
                     finish();
                     break;
             }

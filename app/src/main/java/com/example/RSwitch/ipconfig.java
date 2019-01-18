@@ -10,9 +10,9 @@ import java.io.File;
 
 public class ipconfig {
 
-    protected static final int FLAG_EXISTS = 1;    //已存在
-    protected static final int FLAG_SUCCESS = 2;   //创建成功
-    protected static final int FLAG_FAILED = 3;    //创建失败
+    protected static final int FLAG_EXISTS = 1;
+    protected static final int FLAG_SUCCESS = 2;
+    protected static final int FLAG_FAILED = 3;
 
     protected static final int REQUEST_EXTERNAL_STORAGE = 1;
     protected static String[] PERMISSIONS_STORAGE = {
@@ -36,7 +36,7 @@ public class ipconfig {
         File ipconfig = new File(configpath);
 
         if (!ipconfig.getParentFile().exists()) {
-            //父目录不存在 创建父目录
+
             if (!ipconfig.getParentFile().mkdirs()) {
                 return FLAG_FAILED;
             }
@@ -59,19 +59,4 @@ public class ipconfig {
 
     }
 
-    /*protected static int Createlyric(){
-        String path = Environment.getExternalStorageDirectory().getPath();
-        String lyricpath = path + "/animusic/lyric/";
-        File lyric = new File(lyricpath);
-        if(lyric.exists()){
-            return FLAG_EXISTS;
-        }
-
-        if(lyric.mkdirs()){
-            return FLAG_SUCCESS;
-        }else{
-            return  FLAG_FAILED;
-        }
-
-    }*/
 }
