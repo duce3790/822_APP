@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -36,9 +37,11 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.example.RSwitch.ip_setting.IP;
+
 public class MainActivity extends AppCompatActivity {
 
-    private TextView show;
+    private TextView show,ip,status;
     private String resultstr;
     private ImageButton IP_setting,login, Light1, Light2;
 
@@ -55,13 +58,15 @@ public class MainActivity extends AppCompatActivity {
         Light2 = (ImageButton)findViewById(R.id.light2);
         IP_setting = (ImageButton) findViewById(R.id.ip_setting);
         login = (ImageButton) findViewById(R.id.login);
+        ip = (TextView) findViewById(R.id.ip);
+        status = (TextView) findViewById(R.id.status);
         final String user = LoginActivity.username;
         final String pass = LoginActivity.password;
 
         View.OnClickListener listener_light1 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new PostCmd().execute("http://" + ip_setting.IP, "light1", user, pass);
+                new PostCmd().execute("http://" + IP, "light1", user, pass);
             }
         };
         Light1.setOnClickListener(listener_light1);
@@ -69,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener_light2 = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new PostCmd().execute("http://" + ip_setting.IP , "light2", user, pass);
+                new PostCmd().execute("http://" + IP , "light2", user, pass);
             }
         };
         Light2.setOnClickListener(listener_light2);
@@ -114,9 +119,17 @@ public class MainActivity extends AppCompatActivity {
 
         // Navigation Icon 要設定在 setSupoortActionBar 才有作用
         // 否則會出現 back bottom
-        //toolbar.setNavigationIcon(R.drawable.ab_android);
+        toolbar.setNavigationIcon(R.drawable.hamburger_icon);
         // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
+
+
+
+        ip.setText("  Login as : "+ip_setting.IP);
+        status.setText("  Host IP : "+LoginActivity.username);
+
+    }
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
