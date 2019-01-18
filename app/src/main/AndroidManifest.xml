@@ -32,15 +32,12 @@
         </intent-filter>
         </activity>
 
-
         <activity
             android:name="com.example.RSwitch.LoginActivity"
             android:label="@string/logintitle">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
-
         </intent-filter>
-
         </activity>
 
         <activity
@@ -51,9 +48,7 @@
                 <action android:name="android.intent.action.MAIN" />
 
             </intent-filter>
-
         </activity>
-
     </application>
 
 </manifest>

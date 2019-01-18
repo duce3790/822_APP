@@ -50,7 +50,6 @@ public class Get extends AsyncTask<String, Void, String>{
                 return "sdd";
             }
 
-
         } catch (Exception e) {
             e.printStackTrace();
 

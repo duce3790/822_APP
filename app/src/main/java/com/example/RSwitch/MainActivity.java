@@ -5,6 +5,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -145,20 +149,33 @@ public class MainActivity extends AppCompatActivity {
         //toolbar.setNavigationIcon(R.drawable.ab_android);
         // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent intent = new Intent();
+                int id = menuItem.getItemId();
+                if (id == R.id.nav_share) {
+                } else if (id == R.id.action_logout) {
+                    intent.setClass(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else if(id == R.id.nav_send){
+                }
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
     }
 
-    /*public void light1(View view){
-        sendRequestWithHttpClient("light1");
-    }
-    public void light2(View view){
-        sendRequestWithHttpClient("light2");
-    }
-    public void fan(View view){
-        sendRequestWithHttpClient("fan");
-    }*/
 
+    
 
 /*
+
     private void  sendRequestWithHttpClient(final String str){
 
         new Thread(new Runnable() {
@@ -257,11 +274,4 @@ public class MainActivity extends AppCompatActivity {
 
 
     };
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 }
