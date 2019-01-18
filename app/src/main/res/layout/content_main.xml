@@ -16,10 +16,13 @@
         android:layout_alignParentStart="true"
 
         android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:background="@layout/light1_press"
         android:text="@string/light1"
         app:layout_constraintBottom_toTopOf="@+id/fan_switch"
         app:layout_constraintEnd_toStartOf="@+id/light2"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ip" />
 
@@ -31,6 +34,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
 
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         android:layout_toRightOf="@id/light1"
         android:background="@layout/light2_press"
         android:text="@string/light2"
@@ -49,6 +54,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerInParent="true"
 
+        android:layout_marginStart="24dp"
         android:background="@layout/fan_switch_press"
         android:text="@string/fan"
         app:layout_constraintBottom_toTopOf="@+id/ip_setting"
@@ -66,6 +72,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
 
+        android:layout_marginEnd="24dp"
         android:layout_toRightOf="@id/fan_switch"
         android:background="@layout/fan_speed_press"
         android:text="@string/fan"
@@ -83,6 +90,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
 
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
         android:background="@layout/id_setting_press"
         android:text="@string/fan"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -99,6 +108,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
 
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:layout_toRightOf="@+id/ip_setting"
         android:background="@layout/login_press"
         android:text="@string/login"
@@ -110,12 +121,15 @@
     <TextView
         android:id="@+id/status"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:text="  Login as :"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textColor="@color/colors"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/ip"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -123,11 +137,13 @@
         android:id="@+id/ip"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginStart="32dp"
         android:text="  Host IP :"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textColor="@color/colors"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/light2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status" />
 
