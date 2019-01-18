@@ -22,16 +22,20 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class ip_setting extends AppCompatActivity {
     public static String IP;
     public ArrayList<String> contents = new ArrayList<String>();
-    private String path = Environment.getExternalStorageDirectory().getPath();
+    private String path = Environment.getExternalStorageDirectory().getPath() + "/RSwitch/ipconfig.txt";;
     private ListView IPlist;
 
     private Button Add, Edit, Del;
@@ -81,7 +85,7 @@ public class ip_setting extends AppCompatActivity {
                         .setView(editText).setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String input = editText.getText().toString() + "\n";
+                        String input = editText.getText().toString();
                         if (input.equals("")){
                             Toast.makeText(ip_setting.this, getString(R.string.inValid), Toast.LENGTH_LONG).show();
                         }
@@ -104,41 +108,33 @@ public class ip_setting extends AppCompatActivity {
         @Override
         protected ArrayList<String> doInBackground(String... strings) {
             if(strings[0].equals("read")){
-                path += "/RSwitch/ipconfig.txt";
+                File file = new File(path);
                 try{
-                    BufferedReader input = new BufferedReader(new FileReader(path));
-                    StringBuffer sb = new StringBuffer();
-                    String strInput = input.readLine();
-                    while(strInput != null){
-                        sb.append(strInput).append("\n");
-                        System.out.println(strInput);
-                        strInput = input.readLine();
+                    InputStream inputStream = new FileInputStream(file);
+                    if(inputStream != null){
+                        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                        String line;
+                        while ((line = bufferedReader.readLine() )!= null){
+                            contents.add(line);
+                        }
+                        inputStream.close();
                     }
-                    String[] result = sb.toString().split("\n");
-                    for(int i=0;i<result.length;i++){
-                        contents.add(result[i]);
-                    }
-                    input.close();
                     return contents;
                 }catch (Exception e){
                     Log.e("File", e.toString());
                     return null;
                 }
             }else if(strings[0].equals("add")){
-                BufferedWriter out = null;
                 try{
-                    out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path,true)));
-                    out.write(strings[1]);
-                }catch (Exception e){
-                    Log.e("WRITEERROR", e.toString());
-                }finally {
-                    try{
-                        out.close();
-                    }catch (Exception e){
-                        Log.e("WRITEERROR", e.toString());
-                    }
+                    FileWriter fw = new FileWriter(path, true);
+                    BufferedWriter bw = new BufferedWriter(fw);
+                    bw.write(strings[1]);
+                    bw.newLine();
+                    bw.close();
+                }catch(IOException e){
+                    e.printStackTrace();
                 }
-
             }
             return null;
         }

@@ -5,7 +5,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -44,38 +48,6 @@ public class MainActivity extends AppCompatActivity {
     boolean light1, light2;
     int fan;
     public static final int SHOW_RESPONSE = 0;
-    private Handler handler = new Handler() {
-    @Override
-    public void handleMessage(Message msg) {
-        super.handleMessage(msg);
-        switch (msg.what) {
-            case SHOW_RESPONSE:
-                String response = (String) msg.obj;
-                String strs = response.substring(response.length()-3);
-                //show.setText(response);
-                //Toast.makeText(MainActivity.this,"yee", Toast.LENGTH_SHORT ).show();
-                if(Character.getNumericValue(strs.charAt(0))==1)
-                    light1 = true;
-                else
-                    light1 = false;
-                if(Character.getNumericValue(strs.charAt(1))==1)
-                    light2 = true;
-                else
-                    light2 = false;
-                fan = Character.getNumericValue(strs.charAt(2));
-                show.setText(
-                                "Light 1 : " + strs.charAt(0) + "\n" +
-                                "Light 2 : " + strs.charAt(1) + "\n" +
-                                "Fan Speed : " + strs.charAt(2)
-                );
-
-                break;
-            default:
-                break;
-        }
-    }
-};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,23 +121,42 @@ public class MainActivity extends AppCompatActivity {
         // Menu item click 的監聽事件一樣要設定在 setSupportActionBar 才有作用
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
 
+
+
         ip.setText("  Login as : "+ip_setting.IP);
         status.setText("  Host IP : "+LoginActivity.username);
 
     }
 
-    /*public void light1(View view){
-        sendRequestWithHttpClient("light1");
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Intent intent;
+                intent = new Intent();
+                int id = menuItem.getItemId();
+                if (id == R.id.nav_share) {
+                } else if (id == R.id.action_logout) {
+                    intent.setClass(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else if(id == R.id.nav_send){
+
+                }
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
     }
-    public void light2(View view){
-        sendRequestWithHttpClient("light2");
-    }
-    public void fan(View view){
-        sendRequestWithHttpClient("fan");
-    }*/
+
+
 
 
 /*
+
     private void  sendRequestWithHttpClient(final String str){
 
         new Thread(new Runnable() {
@@ -264,11 +255,4 @@ public class MainActivity extends AppCompatActivity {
 
 
     };
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // 為了讓 Toolbar 的 Menu 有作用，這邊的程式不可以拿掉
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 }
