@@ -42,4 +42,10 @@
         <string name="Cancel">Cancel</string>
         <string name="inValid">Please enter a VALID address</string>
         <string name="title">Add a address to connect</string>
+
+    <!-- NavigationView Menu options -->
+    <string name="logout">Logout</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
 </resources>

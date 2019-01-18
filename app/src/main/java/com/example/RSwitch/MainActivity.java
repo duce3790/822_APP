@@ -45,38 +45,6 @@ public class MainActivity extends AppCompatActivity {
     boolean light1, light2;
     int fan;
     public static final int SHOW_RESPONSE = 0;
-    private Handler handler = new Handler() {
-    @Override
-    public void handleMessage(Message msg) {
-        super.handleMessage(msg);
-        switch (msg.what) {
-            case SHOW_RESPONSE:
-                String response = (String) msg.obj;
-                String strs = response.substring(response.length()-3);
-                //show.setText(response);
-                //Toast.makeText(MainActivity.this,"yee", Toast.LENGTH_SHORT ).show();
-                if(Character.getNumericValue(strs.charAt(0))==1)
-                    light1 = true;
-                else
-                    light1 = false;
-                if(Character.getNumericValue(strs.charAt(1))==1)
-                    light2 = true;
-                else
-                    light2 = false;
-                fan = Character.getNumericValue(strs.charAt(2));
-                show.setText(
-                                "Light 1 : " + strs.charAt(0) + "\n" +
-                                "Light 2 : " + strs.charAt(1) + "\n" +
-                                "Fan Speed : " + strs.charAt(2)
-                );
-
-                break;
-            default:
-                break;
-        }
-    }
-};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Intent intent = new Intent();
+                Intent intent;
+                intent = new Intent();
                 int id = menuItem.getItemId();
                 if (id == R.id.nav_share) {
                 } else if (id == R.id.action_logout) {
@@ -162,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else if(id == R.id.nav_send){
+
                 }
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -172,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    
+
 
 /*
 
