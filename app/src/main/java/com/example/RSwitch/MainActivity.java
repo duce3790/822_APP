@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new PostCmd().execute("http://" + ip_setting.IP, "light1", user, pass);
-                sendRequestWithHttpClient("light1");
             }
         };
         Light1.setOnClickListener(listener_light1);
@@ -109,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent goin = new Intent();//建立intent
                 goin.setClass(MainActivity.this, com.example.RSwitch.ip_setting.class);
                 startActivity(goin);//啟動
+                onPause();
             }
         };
 
@@ -147,9 +147,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
     }
 
-    public void loginPost(View view){
-        sendRequestWithHttpClient("login");
-    }
     /*public void light1(View view){
         sendRequestWithHttpClient("light1");
     }
@@ -161,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
 
-
+/*
     private void  sendRequestWithHttpClient(final String str){
 
         new Thread(new Runnable() {
@@ -196,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
 
         }).start();
     }
-
+*/
 
     public class PostCmd extends AsyncTask<String, Void, Void> {
 
